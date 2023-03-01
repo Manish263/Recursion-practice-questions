@@ -1,0 +1,21 @@
+void helper(vector<string>& res, int n, int open, int close,string curr ) {
+    // base case: if the number of open and close parentheses is equal to n, the current string is well-formed
+    if (open==n && close==n) {
+        res.push_back(curr);
+        return;
+    }
+    // recursive case 1: if we can add an open parenthesis, do so and call the function recursively
+    if (open < n) {
+        helper(res, n, open + 1, close, curr+'(');
+    }
+    // recursive case 2: if we can add a close parenthesis, do so and call the function recursively
+    if (close < open) {
+        helper(res, n, open, close + 1, curr + ')');
+    }
+}
+    vector<string> generateParenthesis(int n) {
+    vector<string> res;
+    // call the helper function to generate all possible combinations of well-formed parentheses
+    helper(res,n, 0, 0,"");
+    return res;
+    }

@@ -1,4 +1,39 @@
-	int mod = (int)(1e9 + 7);
+	
+TIME LIMIT EXCEED SOLUTION:
+const int mod = 1e9 + 7;
+	int helper(int arr[],int n,int sum,int ind,int s,vector<int>&v){
+	    if(ind==n){
+	        if(s==sum){
+	            return 1;
+	        }
+	        return 0;
+	    }
+	    
+	    //first we write recursive calls to take ind elements .
+	    //and add sum together.
+	    int cnt=0;
+	    cnt=(cnt+helper(arr,n,sum,ind+1,s+=arr[ind],v))%mod;
+	    v.pop_back();
+	    
+	   //then we write recursive calls to not take elements 
+	   //to chekc s ==sum or not
+	    s-=arr[ind];
+       cnt=(cnt+helper(arr,n,sum,ind+1,s,v))%mod;
+      return cnt;
+	    
+	}
+	int perfectSum(int arr[], int n, int sum)
+	{
+	    vector<int>v;
+	    int cnt = helper(arr,n,sum,0,0,v);
+	    
+	    return cnt;
+	}
+
+
+ACCEPTED:
+
+int mod = (int)(1e9 + 7);
 	
 	vector<vector<int>> dp;
 	int N;
